@@ -1,0 +1,27 @@
+---
+title: "Linear Model with prediction"
+author: "Diana Reyes"
+date: "11/28/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Introduction
+
+This is the linear model with prediction problem. Predict strength scores using data from the following web site.
+
+```{r}
+dataF <- read.csv(file="http://onlinestatbook.com/case_studies_rvls/physical_strength/data.txt",sep="",header=TRUE)
+```
+
+```{r}
+require(tidyverse)
+require(tigerstats)
+require(rgl)
+require(knitr)
+require(ggplot)
+```
+
+
