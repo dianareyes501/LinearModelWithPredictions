@@ -21,7 +21,74 @@ require(tidyverse)
 require(tigerstats)
 require(rgl)
 require(knitr)
-require(ggplot)
+require(ggplot2)
+```
+## Scatterplot
+
+```{r}
+plot(SIMS~ARM,data=dataF)
 ```
 
+
+```{r}
+basicNN <- ggplot(dataF,aes(y=SIMS,x=ARM))
+basicNN + geom_point()+geom_smooth(method=lm)
+```
+
+## now add the model fit to plot
+
+###Model.1
+
+```{r}
+model.1 <- lm(SIMS~ARM,data=dataF)
+summary.lm(model.1)
+New=data.frame(GRIP=94,ARM=88)
+predict.lm(model.1,New,interval = "prediction")
+```
+
+Model.1 shows that the Adjusted R-Squared: 0.467 
+
+
+```{r}
+plot(SIMS~GRIP,data=dataF)
+```
+
+```{r}
+basicNN <- ggplot(dataF,aes(y=SIMS,x=GRIP))
+basicNN + geom_point()+geom_smooth(method=lm)
+```
+###Model.2
+
+```{r}
+model.2 <- lm(SIMS~GRIP,data=dataF)
+summary.lm(model.2)
+New=data.frame(GRIP=94,ARM=88)
+predict.lm(model.2,New,interval = "prediction")
+```
+
+Model.2 reflects an Adjusted R-Squared: 0.4053 which is lower than Model.1 Adjusted R-Squared, therefore we cannot use Model.2. for variable of grip.
+
+###Model.3
+
+```{r}
+model.3 <- lm(SIMS~ARM+GRIP,data=dataF)
+summary.lm(model.3)
+New=data.frame(GRIP=94,ARM=88)
+predict.lm(model.3,New,interval = "prediction")
+```
+
+Model.3 reflects and Adjusted R-Squared: 0.5358 in which is higher than both Model.1 and Model.2. Model.3 will be the best model when using the variables grip and arm strength. 
+
+##Compare Model.1 and Model.3
+
+```{r}
+anova(model.1,model.3)
+```
+
+
+Model.1 and Model.3 allows us to make a prediction between arm and arm plus grip in order to determine strength. 
+
+## Conclusion
+
+Arms and Arms plus Grips are  the best variables used in order to provide the most accurate linear models and regressions. 
 
